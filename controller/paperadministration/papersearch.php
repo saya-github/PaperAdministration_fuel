@@ -19,6 +19,8 @@ class Controller_Paperadministration_Papersearch extends Controller
 				'value2' => '',
 			];
 	*/
+
+	//TOPページに最新５件を表示する
 	public function action_index(){
 		//検索条件の生成
 		$query = [
@@ -29,6 +31,7 @@ class Controller_Paperadministration_Papersearch extends Controller
 					'column2' => '',
 					'value2' => '',
 				];
+
 		//生成した検索条件をModel(paperadministration/papsersearch/papersearch)に渡す
 		$contents['papers'] = Model_Paperadministration_Papersearch::find_paper($query);
 		//検索してきた論文たちをViewのコンテンツ部分(paperadministration/parts/newpaper)に渡す
@@ -37,6 +40,7 @@ class Controller_Paperadministration_Papersearch extends Controller
 		return View::forge('paperadministration/index', $data);
 	}
 
+	//メニューリストのいずれかがクリックされた時の処理
 	public function action_genresearch(){
 		//main.jsから投げられたpostdataを取得
 		$pagetitle = Input::post('pagetitle');
@@ -55,15 +59,18 @@ class Controller_Paperadministration_Papersearch extends Controller
 			$query['value'] = '';
 		}
 
-		$contents['pagetitle'] = Model_Paperadministration_Papersearch::make_layout($pagetitle);
 		//生成した検索条件をModel(paperadministration/papsersearch/papersearch)に渡す
 		$contents['papers'] = Model_Paperadministration_Papersearch::find_paper($query);
+
+		$contents['pagetitle'] = Model_Paperadministration_Papersearch::trans_word($pagetitle);
+
 		//検索してきた論文たちをViewのコンテンツ部分(paperadministration/parts/newpaper)に渡す
 		$data['content'] = View::forge('paperadministration/parts/content', $contents);
 		//main.jsに検索結果を挿入済みのコンテンツ部分を渡す
 		return $data['content'];
 	}
 
+	//検索ボタンが押されたときの処理
 	public function action_search(){
 		//main.jsから投げられたpostdataを取得
 		$category = Input::post('category');
@@ -98,6 +105,8 @@ class Controller_Paperadministration_Papersearch extends Controller
 			//生成した検索条件をModel(paperadministration/papsersearch/papersearch)に渡す
 			$contents['papers'] = Model_Paperadministration_Papersearch::find_paper($query);
 		}
+
+		$contents['pagetitle'] = '';
 
 		//検索してきた論文たちをViewのコンテンツ部分(paperadministration/parts/newpaper)に渡す
 		$data['content'] = View::forge('paperadministration/parts/content', $contents);

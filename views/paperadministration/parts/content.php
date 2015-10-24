@@ -1,30 +1,21 @@
-<?php
-    echo '<div class="container-fluid">
+<div class="container-fluid">
             <div class="row">
-                <div class="col-lg-12">';
-    foreach($papers as $paper) {
-        echo '<h3>';
-        echo $paper['title'];
-        echo '</h3>
-        <li>';
-        echo '著者：'.$paper['author'];
-        echo '</li>
-        <li>';
-        echo 'bibtexID：'.$paper['bibtexID'];
-        echo '</li>
-        <li>';
-        echo '学年：'.$paper['degree'];
-        echo '</li>
-        <li>';
-        echo '年：'.$paper['year'];
-        echo '</li>
-        <li>';
-        echo '分野：'.$paper['category'];
-        echo '</li>
-        <li>';
-        echo 'ファイル名：'.$paper['filename'];
-        echo '</li>
-        <p></p>';
+                <div class="col-lg-12">
+<?php
+    if($pagetitle){
+        echo '<h1>'.$pagetitle.'</h1>';
     }
-    echo '</div></div></div>';
+    foreach($papers as $paper) {
+        echo '<p></p>
+            <h3>'.$paper['title'].'</h3>
+            <li>著者：'.$paper['author'].'</li>
+            <li>bibtexID：'.$paper['bibtexID'].'</li>
+            <li>学年：'.$paper['degree'].'</li>
+            <li>年：'.$paper['year'].'</li>
+            <li>分野：'.$paper['category'].'</li>
+            <li>ファイル名：'.$paper['filename'].'</li>
+            <p></p>';
+    }
+
 ?>
+</div></div></div>

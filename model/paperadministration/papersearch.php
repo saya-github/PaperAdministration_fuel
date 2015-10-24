@@ -51,8 +51,30 @@ class Model_Paperadministration_Papersearch extends Model
 		return $data['papers'];
 	}
 
-	public static function make_layout($content)
+	public static function trans_word($content)
 	{
-		
+		switch ($content){
+			case 'national':
+				$content = '国内発表';
+			  break;
+			case 'international':
+				$content = '国際発表';
+			  break;
+			case 'journal':
+				$content = '論文誌';
+			  break;
+			case 'tesis':
+				$content = '学位論文';
+			  break;
+			case 'award':
+				$content = '受賞';
+			  break;
+			case 'press':
+				$content = '報道';
+			  break;
+			default:
+				$content = '一覧';
+		}
+		return $content;
 	}
 }
